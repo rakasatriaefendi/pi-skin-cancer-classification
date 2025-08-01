@@ -87,6 +87,10 @@ def load_model():
         
 model = load_model()
 
+st.write("Model input:", model.input)
+st.write("Model output:", model.output)
+
+
 # ====== [UI - JUDUL & UPLOAD] ======
 st.title("🔬 Skin Cancer Detection from Image")
 st.markdown("Upload gambar kulit untuk memprediksi jenis lesi dan mendapatkan informasi medis edukatif.")
