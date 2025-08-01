@@ -79,17 +79,10 @@ disease_info = {
 @st.cache_resource
 def load_model():
     # Coba memuat model dari format .keras
-    try:
-        return tf.keras.models.load_model("trained_model.keras", compile=False)
-    except Exception as e:
-        st.error(f"Error loading model: {e}")
-        return None
+    tf.keras.models.load_model("trained_model.keras", compile=False)
+    return None
         
 model = load_model()
-
-st.write("Model input:", model.input)
-st.write("Model output:", model.output)
-
 
 # ====== [UI - JUDUL & UPLOAD] ======
 st.title("🔬 Skin Cancer Detection from Image")
