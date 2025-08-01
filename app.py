@@ -80,7 +80,7 @@ disease_info = {
 def load_model():
     # Coba memuat model dari format .keras
     try:
-        return tf.keras.models.load_model("trained_model.keras")
+        return tf.keras.models.load_model("trained_model.keras", compile:False)
     except Exception as e:
         st.error(f"Error loading model: {e}")
         return None
