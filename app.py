@@ -6,11 +6,8 @@ import tensorflow as tf
 import matplotlib.pyplot as plt
 from fpdf import FPDF
 import io
-from tensorflow.keras.applications.xception import preprocess_input  # Import preprocess_input
 
 st.set_page_config(page_title="Skin Cancer Classifier", layout="wide")
-
-print(tf.__version__)
 
 # ====== [LABEL & PENJELASAN] ======
 folder_to_label = {
@@ -78,13 +75,7 @@ disease_info = {
 # ====== [LOAD MODEL] ======
 @st.cache_resource
 def load_model():
-    # Coba memuat model dari format .keras
-    try:
-        return tf.keras.models.load_model("trained_model.keras")
-    except Exception as e:
-        st.error(f"Error loading model: {e}")
-        return None
-    
+    return tf.keras.models.load_model("trained_model.keras")
 model = load_model()
 
 # ====== [UI - JUDUL & UPLOAD] ======
@@ -104,7 +95,6 @@ if uploaded_file is not None:
     with col2:
         resized_image = image.resize((224, 224))
         img_array = np.array(resized_image) / 255.0
-        img_array = preprocess_input(img_array)  # Gunakan preprocess_input
         img_array = np.expand_dims(img_array, axis=0)
 
         prediction = model.predict(img_array)
