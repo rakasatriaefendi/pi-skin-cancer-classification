@@ -6,6 +6,7 @@ import tensorflow as tf
 import matplotlib.pyplot as plt
 from fpdf import FPDF
 import io
+from tensorflow.keras.applications.xception import preprocess_input  # Import preprocess_input
 
 st.set_page_config(page_title="Skin Cancer Classifier", layout="wide")
 
@@ -93,8 +94,9 @@ if uploaded_file is not None:
         st.image(image, caption="🖼️ Gambar yang Diunggah", use_column_width=True)
 
     with col2:
-        resized_image = image.resize((224, 224))
+        resized_image = image.resize((299, 299))  # Ubah ukuran ke 299x299
         img_array = np.array(resized_image) / 255.0
+        img_array = preprocess_input(img_array)  # Gunakan preprocess_input
         img_array = np.expand_dims(img_array, axis=0)
 
         prediction = model.predict(img_array)
