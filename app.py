@@ -75,7 +75,7 @@ disease_info = {
 # ====== [LOAD MODEL] ======
 @st.cache_resource
 def load_model():
-    return tf.keras.models.load_model("trained_model.keras")
+    return tf.keras.models.load_model("trained_model.h5")
 model = load_model()
 
 # ====== [UI - JUDUL & UPLOAD] ======
