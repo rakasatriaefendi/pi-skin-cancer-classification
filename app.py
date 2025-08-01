@@ -10,6 +10,8 @@ from tensorflow.keras.applications.xception import preprocess_input  # Import pr
 
 st.set_page_config(page_title="Skin Cancer Classifier", layout="wide")
 
+print(tf.__version__)
+
 # ====== [LABEL & PENJELASAN] ======
 folder_to_label = {
     'akiec': ('Actinic Keratoses', 'Tidak Ganas'),
@@ -76,7 +78,13 @@ disease_info = {
 # ====== [LOAD MODEL] ======
 @st.cache_resource
 def load_model():
-    return tf.keras.models.load_model("trained_model.keras")
+    # Coba memuat model dari format .keras
+    try:
+        return tf.keras.models.load_model("trained_model.keras")
+    except Exception as e:
+        st.error(f"Error loading model: {e}")
+        return None
+    
 model = load_model()
 
 # ====== [UI - JUDUL & UPLOAD] ======
